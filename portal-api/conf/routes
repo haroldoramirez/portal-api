@@ -1,0 +1,100 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                             controllers.Application.index()
+
+# serviços autenticação
+
+GET     /autenticacao/:login/:senha                   @controllers.ControllerAutenticacao.autenticar(login:String, senha:String)
+
+# serviços de cadastro
+POST    /cadastro                                     @controllers.ControllerCadastro.inserir()
+
+# serviços do estudante
+OPTIONS	/estudantes					                  @controllers.ControllerEstudante.options()
+POST	/estudantes				                      @controllers.ControllerEstudante.inserir()
+GET		/estudantes 			            	      @controllers.ControllerEstudante.buscaTodos()
+DELETE  /estudantes/:id                               @controllers.ControllerEstudante.remover(id:Integer)
+PUT     /estudantes/:id                               @controllers.ControllerEstudante.atualizar(id:Integer)
+GET		/estudantes/:id				                  @controllers.ControllerEstudante.buscaPorId(id:Integer)
+
+# serviços do estado
+OPTIONS /estados                                      @controllers.ControllerEstado.options()
+GET     /estados                                      @controllers.ControllerEstado.buscaTodos()
+GET     /estados/:id                                  @controllers.ControllerEstado.buscaPorId(id:Integer)
+
+# serviços da cidade
+OPTIONS /cidades                                      @controllers.ControllerCidade.options()
+GET     /cidades/:id                                  @controllers.ControllerCidade.buscaPorId(id:Integer)
+GET     /cidades/estado/:uf                           @controllers.ControllerCidade.buscaPorUf(uf:String)
+
+# serviços do bairro
+OPTIONS /bairros                                      @controllers.ControllerBairro.options()
+GET     /bairros/:id                                  @controllers.ControllerBairro.buscaPorId(id:Integer)
+GET     /bairros/cidade/:cidade                       @controllers.ControllerBairro.buscaPorCidade(cidade:Integer)
+
+# serviços de endereços
+OPTIONS /enderecos                                    @controllers.ControllerEndereco.options()
+GET     /enderecos/:id                                @controllers.ControllerEndereco.buscaPorId(id:Integer)
+GET     /enderecos/cep/:cep                           @controllers.ControllerEndereco.buscaPorCep(cep:String)
+
+# CRUD de cursos estudante
+OPTIONS /estudantes/cursos                            @controllers.ControllerCursosEstudante.options()
+POST    /estudantes/:idEstudante/cursos               @controllers.ControllerCursosEstudante.inserir(idEstudante:Integer)
+PUT     /estudantes/:idEstudante/cursos/:id           @controllers.ControllerCursosEstudante.atualizar(idEstudante:Integer, id:Integer)
+GET     /estudantes/:idEstudante/cursos               @controllers.ControllerCursosEstudante.buscaPorIdEstudante(idEstudante:Integer)
+GET     /estudantes/:idEstudante/cursos/:id           @controllers.ControllerCursosEstudante.buscaPorIdCurso(idEstudante:Integer, id:Integer)
+DELETE  /estudantes/:idEstudante/cursos/:id           @controllers.ControllerCursosEstudante.remover(idEstudante:Integer, id:Integer)
+
+
+# CRUD de experiencia
+OPTIONS /estudantes/experiencias                      @controllers.ControllerExperiencia.options()
+POST    /estudantes/:idEstudante/experiencias         @controllers.ControllerExperiencia.inserir(idEstudante:Integer)
+PUT     /estudantes/:idEstudante/experiencias/:id     @controllers.ControllerExperiencia.atualizar(idEstudante:Integer, id:Integer)
+GET     /estudantes/:idEstudante/experiencias         @controllers.ControllerExperiencia.buscaPorIdEstudante(idEstudante:Integer)
+GET     /estudantes/:idEstudante/experiencias/:id     @controllers.ControllerExperiencia.buscaPorIdExperiencia(idEstudante:Integer, id:Integer)
+DELETE  /estudantes/:idEstudante/experiencias/:id     @controllers.ControllerExperiencia.remover(idEstudante:Integer, id:Integer)
+
+# CRUD estudante idioma
+OPTIONS /estudantes/idiomas                           @controllers.ControllerEstudanteIdioma.options()
+POST    /estudantes/:idEstudante/idiomas              @controllers.ControllerEstudanteIdioma.inserir(idEstudante:Integer)
+PUT     /estudantes/:idEstudante/idiomas/:id          @controllers.ControllerEstudanteIdioma.atualizar(idEstudante:Integer, id:Integer)
+GET     /estudantes/:idEstudante/idiomas              @controllers.ControllerEstudanteIdioma.buscaPorIdEstudante(idEstudante:Integer)
+GET     /estudantes/:idEstudante/idiomas/:id          @controllers.ControllerEstudanteIdioma.buscaPorIdIdioma(idEstudante:Integer, id:Integer)
+DELETE  /estudantes/:idEstudante/idiomas/:id          @controllers.ControllerEstudanteIdioma.remover(idEstudante:Integer, id:Integer)
+
+# CRUD de idioma
+OPTIONS /idiomas                                      @controllers.ControllerIdioma.options()
+POST    /idiomas                                      @controllers.ControllerIdioma.inserir()
+GET     /idiomas                                      @controllers.ControllerIdioma.buscaTodos()
+PUT     /idiomas/:id                                  @controllers.ControllerIdioma.atualizar(id:Integer)
+GET     /idiomas/:id                                  @controllers.ControllerIdioma.buscaPorId(id:Integer)
+
+# serviços grupo conhecimento
+OPTIONS /grupos                                       @controllers.ControllerGrupoConhecimento.options()
+POST    /grupos                                       @controllers.ControllerGrupoConhecimento.inserir()
+GET     /grupos                                       @controllers.ControllerGrupoConhecimento.buscaTodos()
+PUT     /grupos/:id                                   @controllers.ControllerGrupoConhecimento.atualizar(id:Integer)
+GET     /grupos/:id                                   @controllers.ControllerGrupoConhecimento.buscaPorId(id:Integer)
+
+# serviços conhecimento informatica
+OPTIONS /grupos/informatica                           @controllers.ControllerConhecimentoInformatica.options()
+POST    /grupos/:idGrupo/informatica                  @controllers.ControllerConhecimentoInformatica.inserir(idGrupo:Integer)
+PUT     /grupos/:idGrupo/informatica/:id              @controllers.ControllerConhecimentoInformatica.atualizar(idGrupo:Integer, id:Integer)
+GET     /grupos/:idGrupo/informatica                  @controllers.ControllerConhecimentoInformatica.buscaPorIdGrupo(idGrupo:Integer)
+GET     /grupos/:idGrupo/informatica/:id              @controllers.ControllerConhecimentoInformatica.buscaPorIdConhecimentoInformatica(idGrupo:Integer, id:Integer)
+DELETE  /grupos/:idGrupo/informatica/:id              @controllers.ControllerConhecimentoInformatica.remover(idGrupo:Integer, id:Integer)
+
+# serviços estudante conhecimento informatica
+OPTIONS /estudantes/informatica                       @controllers.ControllerEstudanteConhecimentoInformatica.options()
+POST    /estudantes/:idEstudante/informatica          @controllers.ControllerEstudanteConhecimentoInformatica.inserir(idEstudante:Integer)
+PUT     /estudantes/:idEstudante/informatica/:id      @controllers.ControllerEstudanteConhecimentoInformatica.atualizar(idEstudante:Integer, id:Integer)
+GET     /estudantes/:idEstudante/informatica          @controllers.ControllerEstudanteConhecimentoInformatica.buscaPorIdEstudante(idEstudante:Integer)
+GET     /estudantes/:idEstudante/informatica/:id      @controllers.ControllerEstudanteConhecimentoInformatica.buscaPorIdInformatica(idEstudante:Integer, id:Integer)
+DELETE  /estudantes/:idEstudante/informatica/:id      @controllers.ControllerEstudanteConhecimentoInformatica.remover(idEstudante:Integer, id:Integer)
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
